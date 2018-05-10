@@ -11,6 +11,7 @@ const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const clean = require('gulp-clean');
+const gulpSequence = require('gulp-sequence');
 /*~~ GULP TASKS~~*/
 
 //delete the dist folder
@@ -64,4 +65,4 @@ gulp.task('copyhtml', function(){
     .pipe(gulp.dest('dist'))
 });
 
-gulp.task('default', ['cleanDist', 'copyhtml', 'scripts', 'styles', 'optimizeimg', 'icons', 'iconsvg'])
+gulp.task('default', gulpSequence('cleanDist' ,['copyhtml', 'scripts', 'styles', 'optimizeimg', 'icons', 'iconsvg']))
