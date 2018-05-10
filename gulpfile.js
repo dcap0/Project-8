@@ -9,8 +9,15 @@ const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
-
+const imagemin = require('gulp-imagemin');
+const clean = require('gulp-clean');
 /*~~ GULP TASKS~~*/
+
+//delete the dist folder
+gulp.task('cleanDist', function(){
+    return gulp.src('dist/*',{read: false})
+        .pipe(clean())
+})
 
 //Concat and Minify JS, move in dist
 gulp.task('scripts', function (){
@@ -34,3 +41,27 @@ gulp.task('styles', function(){
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist'))
 });
+//optimize images
+gulp.task('optimizeimg', function(){
+    gulp.src('src/images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'))
+});
+//copy icons
+gulp.task('icons', function(){
+    gulp.src('src/icons/*')
+    .pipe(gulp.dest('dist/icons'))
+});
+
+//copy icons 'svg' file content
+gulp.task('iconsvg', function(){
+    gulp.src('src/icons/svg/*')
+    .pipe(gulp.dest('dist/icons/svg'))
+});
+//copies the html
+gulp.task('copyhtml', function(){
+    gulp.src('src/*.html')
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('default', ['cleanDist', 'copyhtml', 'scripts', 'styles', 'optimizeimg', 'icons', 'iconsvg'])
