@@ -1,4 +1,3 @@
-'use strict';
 
 /*~~ NPM PACKAGES ~~*/
 const gulp = require('gulp');
@@ -36,11 +35,11 @@ gulp.task('scripts', function (){
 //Compile to CSS, Concat and Minify, move to dist
 gulp.task('styles', function(){
     return gulp.src(['src/sass/*.sass', 'src/sass/circle/*.sass', 'src/sass/circle/components/*.sass', 'src/sass/circle/core/*.sass'])
-        .pipe(sourcemaps.init())
+       // .pipe(sourcemaps.init())
             .pipe(sass.sync().on('error', sass.logError))
             .pipe(concat('style.css'))
             .pipe(cleanCSS())
-        .pipe(sourcemaps.write())
+       // .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist'))
 });
 //optimize images
