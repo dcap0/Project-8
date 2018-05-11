@@ -12,6 +12,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const imagemin = require('gulp-imagemin');
 const clean = require('gulp-clean');
 const gulpSequence = require('gulp-sequence');
+const browserSync = require('browser-sync');
 /*~~ GULP TASKS~~*/
 
 //delete the dist folder
@@ -65,4 +66,12 @@ gulp.task('copyhtml', function(){
     .pipe(gulp.dest('dist'))
 });
 
-gulp.task('default', gulpSequence('cleanDist' ,['copyhtml', 'scripts', 'styles', 'optimizeimg', 'icons', 'iconsvg']))
+gulp.task('server', function(){
+    browserSync.init({
+        server: {
+            baseDir: './dist'
+        }
+    })
+});
+
+gulp.task('default', gulpSequence('cleanDist' ,['copyhtml', 'scripts', 'styles', 'optimizeimg', 'icons', 'iconsvg'], 'server'))
