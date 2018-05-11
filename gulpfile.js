@@ -15,7 +15,7 @@ const browserSync = require('browser-sync');
 /*~~ GULP TASKS~~*/
 
 //delete the dist folder
-gulp.task('cleanDist', function(){
+gulp.task('clean', function(){
     return gulp.src('dist/*',{read: false})
         .pipe(clean())
 })
@@ -40,10 +40,10 @@ gulp.task('styles', function(){
             .pipe(concat('style.css'))
             .pipe(cleanCSS())
        // .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist/css'))
 });
 //optimize images
-gulp.task('optimizeimg', function(){
+gulp.task('images', function(){
     gulp.src('src/images/*')
         .pipe(imagemin())
         .pipe(gulp.dest('dist/images'))
@@ -73,4 +73,4 @@ gulp.task('server', function(){
     })
 });
 
-gulp.task('default', gulpSequence('cleanDist' ,['copyhtml', 'scripts', 'styles', 'optimizeimg', 'icons', 'iconsvg'], 'server'))
+gulp.task('build', gulpSequence('clean' ,['copyhtml', 'scripts', 'styles', 'images', 'icons', 'iconsvg'], 'server'))
