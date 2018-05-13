@@ -28,18 +28,18 @@ gulp.task('scripts', function (){
             .pipe(gulp.dest('dist'))
             .pipe(rename('all.min.js'))
             .pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist'))
+        .pipe(sourcemaps.write('map'))
+        .pipe(gulp.dest('dist/js'))
 });
 
 //Compile to CSS, Concat and Minify, move to dist
 gulp.task('styles', function(){
     return gulp.src(['src/sass/*.sass', 'src/sass/circle/*.sass', 'src/sass/circle/components/*.sass', 'src/sass/circle/core/*.sass'])
-       // .pipe(sourcemaps.init())
+       .pipe(sourcemaps.init())
             .pipe(sass.sync().on('error', sass.logError))
             .pipe(concat('style.css'))
             .pipe(cleanCSS())
-       // .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write('../map'))
         .pipe(gulp.dest('dist/css'))
 });
 //optimize images
