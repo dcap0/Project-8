@@ -28,7 +28,7 @@ gulp.task('scripts', function (){
             .pipe(gulp.dest('dist'))
             .pipe(rename('all.min.js'))
             .pipe(uglify())
-        .pipe(sourcemaps.write('../map'))
+        .pipe(sourcemaps.write('../js'))
         .pipe(gulp.dest('dist/js'))
 });
 
@@ -39,7 +39,7 @@ gulp.task('styles', function(){
             .pipe(sass.sync().on('error', sass.logError))
             .pipe(concat('style.css'))
             .pipe(cleanCSS())
-        .pipe(sourcemaps.write('../map'))
+        .pipe(sourcemaps.write('../css'))
         .pipe(gulp.dest('dist/css'))
 });
 //optimize images
